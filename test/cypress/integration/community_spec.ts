@@ -1,6 +1,6 @@
 describe('Community version', () => {
     before(() => {
-        cy.getAdminToken().then(token => {
+        cy.getToken().then(token => {
             cy.intercept('POST', '/console/auth/login', {
                 fixture: 'community/login.json',
                 headers: {

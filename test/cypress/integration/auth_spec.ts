@@ -8,7 +8,7 @@ describe('Authentication', () => {
 
     it('succeeds when token is set in cookies and license is active', () => {
         cy.activate()
-            .getAdminToken()
+            .getToken()
             .then(token => cy.setCookie('XSRF-TOKEN', token));
         cy.visit('/console').waitUntilLoaded();
         cy.location('pathname').should('be.equal', '/console/');
@@ -16,7 +16,7 @@ describe('Authentication', () => {
 
     it('succeeds when token is set in cookies and license is not active', () => {
         cy.activate('expired_trial_license')
-            .getAdminToken()
+            .getToken()
             .then(token => cy.setCookie('XSRF-TOKEN', token));
         cy.visit('/console');
         cy.location('pathname').should('be.equal', '/console/license');

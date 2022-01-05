@@ -87,23 +87,27 @@ const commands = {
             .waitUntilPageLoaded(),
     uploadLicense: (license: License) =>
         cy.fixture(`license/${license}.yaml`).then(yaml =>
-            cy.request({
-                method: 'PUT',
-                url: '/console/sp/license',
-                headers: {
-                    Authorization: `Basic ${btoa('admin:admin')}`,
+            cy.cfyRequest(
+                '/license',
+                'PUT',
+                {
                     'Content-Type': 'text/plain'
                 },
-                body: yaml
-            })
+                yaml
+            )
         ),
+    getToken: (username = 'admin', password = 'admin') =>
+        cy
+            .cfyRequest('/tokens', 'GET', { Authorization: `Basic ${btoa(`${username}:${password}`)}` })
+
+            .then(response => response.body.value),
     activate: (license: License = 'valid_trial_license') =>
         cy
-            .uploadLicense(license)
-            .getAdminToken()
+            .getToken()
             .then(adminToken => {
                 token = adminToken;
             })
+            .uploadLicense(license)
             .then(() =>
                 cy.stageRequest(`/console/ua/clear-pages?tenant=default_tenant`, 'GET', { failOnStatusCode: false })
             ),
@@ -116,7 +120,7 @@ const commands = {
     ) =>
         cy.request({
             method,
-            url: `/console/sp${url}`,
+            url: `${Cypress.env('managerUrl')}/api/v3.1${url}`,
             headers: {
                 'Content-Type': 'application/json',
                 ...getCommonHeaders(),

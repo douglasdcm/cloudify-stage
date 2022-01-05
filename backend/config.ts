@@ -37,6 +37,7 @@ export function loadMeJson() {
             throw err;
         }
     }
+    return me;
 }
 
 loadMeJson();
@@ -46,10 +47,11 @@ export function getConfig(mode?) {
         app: _.merge(app, root, logging, { db: { options: dbOptions } }, userConfig),
         manager,
         mode,
-        managerUrl: `${manager.protocol}://${manager.ip}:${manager.port}`
+        managerUrl: ''
     };
 
     _.merge(config, me);
+    config.managerUrl = `${config.manager.protocol}://${config.manager.ip}:${config.manager.port}`;
 
     return config;
 }
