@@ -18,9 +18,7 @@ import { getConfig } from '../../../backend/config';
 
 const setupPluginsAndConfig: Cypress.PluginConfig = (on, config) => {
     config.baseUrl = 'http://localhost:4000';
-
-    const { MANAGER_IP, MANAGER_PROTOCOL = 'http' } = process.env;
-    config.env.managerUrl = MANAGER_IP ? `${MANAGER_PROTOCOL}://${MANAGER_IP}` : getConfig().managerUrl;
+    config.env.managerUrl = getConfig().managerUrl;
 
     return performCommonSetup(on, config, getWebpackConfig({}, { mode: 'test' })[0]);
 };

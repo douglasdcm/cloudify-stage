@@ -96,11 +96,6 @@ const commands = {
                 yaml
             )
         ),
-    getToken: (username = 'admin', password = 'admin') =>
-        cy
-            .cfyRequest('/tokens', 'GET', { Authorization: `Basic ${btoa(`${username}:${password}`)}` })
-
-            .then(response => response.body.value),
     activate: (license: License = 'valid_trial_license') =>
         cy
             .getToken()
