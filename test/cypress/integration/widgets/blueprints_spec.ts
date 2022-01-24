@@ -633,7 +633,7 @@ describe('Blueprints widget', () => {
             cy.wait('@resources');
         });
 
-        describe('create installable blueprint on submit from', () => {
+        describe.only('create installable blueprint on submit from', () => {
             before(() => cy.uploadPluginFromCatalog('Terraform'));
 
             beforeEach(openTerraformModal);

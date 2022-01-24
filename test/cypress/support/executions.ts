@@ -43,7 +43,9 @@ const commands = {
         const deploymentExecutionsUrl = `executions?_include=id,workflow_id,ended_at&deployment_id=${deploymentId}&workflow_id=${workflowId}`;
 
         cy.log(`Waiting for workflow ${workflowId} on deployment ${deploymentId} to be ended.`);
-        return waitUntil(deploymentExecutionsUrl, response => _.find(response.body.items, item => item.ended_at));
+        return waitUntil(deploymentExecutionsUrl, response => _.find(response.body.items, item => item.ended_at), {
+            numberOfRetriesLeft: 60 * 2
+        });
     }
 };
 
