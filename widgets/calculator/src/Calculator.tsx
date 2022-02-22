@@ -49,15 +49,6 @@ function CalculatorFunc() {
     };
 
     return (
-        // <div>
-        //     <Screen theValue1={theValue1} theValue2={theValue2} theResult={theResult} theOperation="+" />
-        //     <Button label="1" onClick={() => setValues(1)} />
-        //     <Button label="2" onClick={() => setValues(2)} />
-        //     <Button label="3" onClick={() => setValues(3)} />
-        //     <Button label='+' onClick={() => setOperation('+')} />
-        //     <Button label="Clear" onClick={() => clear()} />
-        //     <Button label="Calculate" onClick={() => calculate(theOperation, theValue1, theValue2)} />
-        // </div>
         <div className="App">
       <Header title='This is a simple calculator' />
       <Screen

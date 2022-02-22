@@ -3,8 +3,8 @@
 import Calculator from './Calculator';
 
 Stage.defineWidget({
-  id: 'calculator',
-  name: '@Simple Calculator',
+  id: 'calculatorCfy',
+  name: '@Simple Calculator Cfy UI',
   description: 'This is a sample widget for widget writing boilerplate',
   initialWidth: 12,
   initialHeight: 20,
