@@ -57,14 +57,14 @@ describe('User flow', () => {
         cy.get('.modal', { timeout: minutesToMs(1) }).should('not.exist');
 
         cy.getSearchInput().clear().type(resourceName);
-        cy.get('.blueprintsTable > tbody > tr').should('have.length', 1);
-        cy.get('[title="Create deployment"]').click();
+        cy.contains('Main Blueprint File').should('have.length', 1);
+        cy.clickButton('Deploy');
         cy.get('input[name=deploymentName]').type(resourceName);
         cy.clickButton('Install');
 
-        cy.clickButton('Execute');
         cy.get('.modal', { timeout: minutesToMs(1) }).should('not.exist');
 
+        cy.waitForExecutionToEnd('install', { deploymentDisplayName: resourceName });
         cy.contains('.executionsWidget', 'install completed');
         cy.contains('.eventsTable', "'install' workflow execution succeeded");
 

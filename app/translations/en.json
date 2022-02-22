@@ -2,7 +2,7 @@
     "backToApps": "Back to apps",
     "backToLogin": "Back to login",
     "urls": {
-        "pluginsCatalog": "http://repository.cloudifysource.org/cloudify/wagons/plugins.json"
+        "pluginsCatalog": "http://repository.cloudifysource.org/cloudify/wagons/v2_plugins.json"
     },
     "cluster": {
         "manager": "Manager",
@@ -24,6 +24,41 @@
         },
         "servicesStatus": "Services Status",
         "systemStatus": "System Status"
+    },
+    "contactDetailsModal": {
+        "header": "Welcome to Cloudify",
+        "form": {
+            "fields": {
+                "firstName": {
+                    "label": "First name",
+                    "validationMessage": "Please provide a valid first name, which should be between 2 to 20 characters long"
+                },
+                "lastName": {
+                    "label": "Last name",
+                    "validationMessage": "Please provide a valid last name, which should be between 2 and 20 characters long"
+                },
+                "email": {
+                    "label": "Email address",
+                    "validationMessage": "Please provide a valid email address"
+                },
+                "phone": {
+                    "label": "Phone number",
+                    "validationMessage": "Please provide a valid phone number, which should consists only of 4 - 20 digits"
+                },
+                "isEULA": {
+                    "label": "By registering for the Cloudify Hosted Service you agree to the <a href=\"https://cloudify.co/license\" target=\"_blank\" onclick=\"event.stopPropagation();\">Hosted Trial End User License Agreement</a>"
+                },
+                "isSendServicesDetails": {
+                    "label": "Cloudify uses the information provided to send you your service details. For more information see our <a href=\"https://cloudify.co/privacy-policy/\" target=\"_blank\" onclick=\"event.stopPropagation();\">Privacy Policy</a>"
+                }
+            },
+            "validation": {
+                "isFieldRequired": "Field is required"
+            },
+            "buttons": {
+                "submit": "Continue"
+            }
+        }
     },
     "gettingStartedModal": {
         "cancelConfirm": "Are you sure you want to cancel the setup process?",
@@ -490,7 +525,7 @@
                 "workflowsMenu": {
                     "tooltip": "Execute workflow"
                 },
-                "executeModal": {
+                "execute": {
                     "header": {
                         "noDeployment": "Execute workflow {{workflowName}}",
                         "singleDeployemnt": "Execute workflow {{workflowName}} on {{deploymentId}}",
@@ -585,7 +620,8 @@
                         "deploymentInputs": "Deployment Inputs",
                         "deploymentMetadata": "Deployment Metadata",
                         "executionParameters": "Execution Parameters",
-                        "advanced": "Advanced"
+                        "advanced": "Advanced",
+                        "install": "Install"
                     },
                     "buttons": {
                         "showDataTypes": "Show Data Types",
@@ -681,7 +717,7 @@
             },
             "revertToDefault": "Revert to default value",
             "urls": {
-                "blueprintsCatalog": "http://repository.cloudifysource.org/cloudify/blueprints/6.2/examples.json",
+                "blueprintsCatalog": "http://repository.cloudifysource.org/cloudify/blueprints/6.3/examples.json",
                 "helloWorldBlueprint": "https://github.com/cloudify-cosmo/cloudify-hello-world-example/archive/master.zip",
                 "linkParameterExample": "https://cloudify.co"
             },
@@ -736,7 +772,7 @@
                     "uploadButton": "Upload",
                     "uploadFromMarketplace": "Upload from Marketplace",
                     "uploadFromPackage": "Upload a blueprint package",
-                    "uploadFromTerraformTemplate": "Upload from Terraform template",
+                    "uploadFromTerraformTemplate": "Upload from Terraform module",
                     "generateInComposer": "Generate in the Composer"
                 }
             },
@@ -776,27 +812,27 @@
                         "defaultValues": [
                             {
                                 "name": "AWS",
-                                "url": "https://repository.cloudifysource.org/cloudify/blueprints/6.2/aws_services.json"
+                                "url": "https://repository.cloudifysource.org/cloudify/blueprints/6.3/aws_services.json"
                             },
                             {
                                 "name": "Azure",
-                                "url": "https://repository.cloudifysource.org/cloudify/blueprints/6.2/azure_services.json"
+                                "url": "https://repository.cloudifysource.org/cloudify/blueprints/6.3/azure_services.json"
                             },
                             {
                                 "name": "GCP",
-                                "url": "https://repository.cloudifysource.org/cloudify/blueprints/6.2/gcp_services.json"
+                                "url": "https://repository.cloudifysource.org/cloudify/blueprints/6.3/gcp_services.json"
                             },
                             {
                                 "name": "Terraform",
-                                "url": "https://repository.cloudifysource.org/cloudify/blueprints/6.2/terraform_services.json"
+                                "url": "https://repository.cloudifysource.org/cloudify/blueprints/6.3/terraform_services.json"
                             },
                             {
                                 "name": "Helm",
-                                "url": "https://repository.cloudifysource.org/cloudify/blueprints/6.2/helm_services.json"
+                                "url": "https://repository.cloudifysource.org/cloudify/blueprints/6.3/helm_services.json"
                             },
                             {
                                 "name": "Other",
-                                "url": "https://repository.cloudifysource.org/cloudify/blueprints/6.2/other_services.json"
+                                "url": "https://repository.cloudifysource.org/cloudify/blueprints/6.3/other_services.json"
                             }
                         ]
                     }
@@ -820,7 +856,7 @@
                 "blueprintName": "Blueprint name",
                 "terraformVersion": "Terraform version",
                 "blueprintInformation": "Blueprint main information",
-                "template": "URL to your Terraform template (zip or git)",
+                "template": "URL to a zip archive that contains the Terraform module",
                 "resourceLocation": "Terraform folder in the archive",
                 "urlAuthentication": "URL authentication",
                 "username": "Username",
@@ -832,12 +868,13 @@
                 "variablesTable": {
                     "name": "Variable",
                     "source": "Source",
-                    "value": "Value",
+                    "value": "Value / Secret key / Input name",
                     "sources": {
                         "secret": "Secret",
                         "input": "Input",
                         "static": "Static"
-                    }
+                    },
+                    "newSecretPrefix": "[new]"
                 },
                 "outputsTable": {
                     "name": "Output",
@@ -870,7 +907,8 @@
                         "nameDuplicated": "Variables must be unique, duplicates are not allowed",
                         "sourceMissing": "Please provide variable source",
                         "valueMissing": "Please provide variable value",
-                        "valueInvalid": "Please provide valid variable value - only letters, digits and the characters \"-\", \".\" and \"_\" are allowed"
+                        "valueInvalid": "Please provide valid variable value - only letters, digits and the characters \"-\", \".\" and \"_\" are allowed",
+                        "staticValueInvalid": "Please provide valid variable value - allowed only letters, digits and the characters \"-\", \".\" and \"_\". If special characters or complex structures are needed please provide this value inside a secret"
                     },
                     "environmentVariable": {
                         "nameMissing": "Please provide environment variable name",
@@ -878,7 +916,8 @@
                         "nameDuplicated": "Environment variables must be unique, duplicates are not allowed",
                         "sourceMissing": "Please provide environment variable source",
                         "valueMissing": "Please provide environment variable value",
-                        "valueInvalid": "Please provide valid environment variable value - only letters, digits and the characters \"-\", \".\" and \"_\" are allowed"
+                        "valueInvalid": "Please provide valid environment variable value - only letters, digits and the characters \"-\", \".\" and \"_\" are allowed",
+                        "staticValueInvalid": "Please provide valid environment variable value - allowed only letters, digits and the characters \"-\", \".\" and \"_\". If special characters or complex structures are needed please provide this value inside a secret"
                     },
                     "output": {
                         "nameMissing": "Please provide output name",
@@ -1444,6 +1483,38 @@
             "charts": {
                 "tooltip": {
                     "label": "Number of executions"
+                }
+            }
+        },
+        "tenants": {
+            "name": "Tenants management",
+            "description": "This widget shows a list of available tenants, and allow managing them",
+            "createModal": {
+                "header": "Add tenant",
+                "form": {
+                    "errors": {
+                        "emptyTenantName": "Please provide tenant name"
+                    },
+                    "buttons": {
+                        "addTenant": "Add"
+                    },
+                    "fields": {
+                        "tenantName": "Tenant name"
+                    }
+                }
+            },
+            "tenantsTable": {
+                "noDataMessage": "There are no Tenants available. Click \"Add\" to add Tenants.",
+                "columns": {
+                    "name": "Name",
+                    "groups": "# Groups",
+                    "users": "# Users"
+                },
+                "errors": {
+                    "unknownAction": "Internal error: Unknown action {{actionName}} cannot be handled."
+                },
+                "deleteModal": {
+                    "content": "Are you sure you want to delete tenant {{tenantName}}?"
                 }
             }
         }
