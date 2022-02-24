@@ -19,6 +19,7 @@ Stage.defineWidget<never, never, DeploymentsViewWidgetConfiguration>({
     id: 'deploymentsView',
     name: Stage.i18n.t(`${i18nPrefix}.name`),
     description: Stage.i18n.t(`${i18nPrefix}.description`),
+    initialHeight: 10,
 
     initialConfiguration: [
         ...sharedConfiguration,
